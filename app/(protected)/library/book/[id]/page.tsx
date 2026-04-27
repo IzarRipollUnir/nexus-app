@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { libraryService } from '@/lib/libraryService';
 import { AddToCartButton } from './AddToCartButton';
+import styles from './BookDetailPage.module.css';
 
 type BookDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -12,59 +13,59 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
   const book = await libraryService.getBookById(id);
 
   return (
-    <section className="w-full">
+    <section className={styles.root}>
       <Link
-        className="mb-5 inline-flex rounded border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100"
+        className={styles.backLink}
         href="/library"
       >
         Volver
       </Link>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-[minmax(260px,340px)_1fr]">
-        <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm">
-          <div className="relative h-[560px] w-full">
-            <Image alt={book.title} className="object-cover" fill sizes="(max-width: 768px) 100vw, 340px" src={book.cover} />
+      <div className={styles.grid}>
+        <div className={styles.coverCard}>
+          <div className={styles.coverWrap}>
+            <Image alt={book.title} className={styles.coverImage} fill sizes="(max-width: 768px) 100vw, 340px" src={book.cover} />
           </div>
         </div>
 
         <div>
-          <h1 className="text-3xl font-semibold">{book.title}</h1>
-          <p className="mt-1 text-xl text-zinc-600">{book.author}</p>
+          <h1 className={styles.title}>{book.title}</h1>
+          <p className={styles.author}>{book.author}</p>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className={styles.badges}>
             {book.category ? (
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800">
+              <span className={`${styles.badge} ${styles.badgeCategory}`}>
                 {book.category}
               </span>
             ) : null}
             {book.year ? (
-              <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700">
+              <span className={`${styles.badge} ${styles.badgeYear}`}>
                 {book.year}
               </span>
             ) : null}
           </div>
 
-          <p className="mt-6 text-3xl font-semibold text-emerald-700">
+          <p className={styles.price}>
             {new Intl.NumberFormat('es-ES', {
               style: 'currency',
               currency: 'EUR',
             }).format(book.price)}
           </p>
 
-          <dl className="mt-6 grid gap-2 text-sm sm:grid-cols-[180px_1fr]">
-            <dt className="font-semibold text-zinc-700">ISBN</dt>
-            <dd className="text-zinc-800">{book.ISBN ?? 'No disponible'}</dd>
+          <dl className={styles.details}>
+            <dt className={styles.detailLabel}>ISBN</dt>
+            <dd className={styles.detailValue}>{book.ISBN ?? 'No disponible'}</dd>
 
-            <dt className="font-semibold text-zinc-700">Año de publicacion</dt>
-            <dd className="text-zinc-800">{book.year ?? 'No disponible'}</dd>
+            <dt className={styles.detailLabel}>Año de publicacion</dt>
+            <dd className={styles.detailValue}>{book.year ?? 'No disponible'}</dd>
           </dl>
 
-          <h2 className="mt-8 text-xl font-semibold">Descripcion</h2>
-          <p className="mt-2 whitespace-pre-line text-zinc-700">
+          <h2 className={styles.sectionTitle}>Descripcion</h2>
+          <p className={styles.description}>
             {book.description ?? 'Sin descripcion disponible.'}
           </p>
 
-          <div className="mt-8">
+          <div className={styles.actions}>
             <AddToCartButton />
           </div>
         </div>

@@ -1,16 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Box,
-  Card,
-  CardContent,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-} from '@mui/material';
 import { login } from '../actions/auth';
+import styles from './LoginFormClient.module.css';
 
 type LoginFormClientProps = {
   redirectTo: string;
@@ -31,60 +23,54 @@ export function LoginFormClient({ redirectTo }: LoginFormClientProps) {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '80vh',
-      }}
-    >
-      <Card sx={{ maxWidth: 400, width: '100%' }}>
-        <CardContent>
-          <Typography variant="h4" component="h1" gutterBottom align="center">
-            Iniciar Sesión
-          </Typography>
-          <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-            Accede a Nexus
-          </Typography>
+    <div className={styles.root}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Iniciar Sesión</h1>
+        <p className={styles.subtitle}>Accede a Nexus</p>
 
           {error ? (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <div className={styles.alert}>
               {error}
-            </Alert>
+            </div>
           ) : null}
 
-          <form action={login} onSubmit={handleSubmit}>
+          <form action={login} className={styles.form} onSubmit={handleSubmit}>
             <input name="redirectTo" type="hidden" value={redirectTo} />
 
-            <TextField
-              fullWidth
-              label="Email"
+            <label className={styles.label} htmlFor="email">
+              Email
+            </label>
+            <input
+              className={styles.input}
+              id="email"
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              margin="normal"
               name="email"
               required
             />
 
-            <TextField
-              fullWidth
-              label="Contraseña"
+            <label className={styles.label} htmlFor="password">
+              Contraseña
+            </label>
+            <input
+              className={styles.input}
+              id="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              margin="normal"
               name="password"
               required
             />
 
-            <Button type="submit" fullWidth variant="contained" size="large" sx={{ mt: 3 }}>
+            <button
+              className={styles.button}
+              type="submit"
+            >
               Iniciar Sesión
-            </Button>
+            </button>
           </form>
-        </CardContent>
-      </Card>
-    </Box>
+      </div>
+    </div>
   );
 }

@@ -2,25 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  Box,
-  CircularProgress,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import HistoryIcon from '@mui/icons-material/History';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import HomeIcon from '@mui/icons-material/Home';
 import type { Category } from '@/types';
-
-const DRAWER_WIDTH = 240;
+import styles from './LibraryHeader.module.css';
 
 export function LibraryHeader() {
   const router = useRouter();
@@ -62,96 +45,88 @@ export function LibraryHeader() {
     };
   }, []);
 
-  const toggleDrawer = () => {
-    setDrawerOpen((open) => !open);
-  };
-
   return (
-    <Box sx={{ display: 'flex', width: '100%', mb: 3 }}>
-      <Drawer
-        open={drawerOpen}
-        onClose={toggleDrawer}
-        variant="temporary"
-        sx={{
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: DRAWER_WIDTH,
-            boxSizing: 'border-box',
-            position: 'relative',
-          },
-        }}
-      >
-        <Box sx={{ p: 2 }}>
-          <Typography variant="h6" gutterBottom>
-            Categorías
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
+    <>
+      <div className={styles.root}>
+        <div className={styles.topRow}>
+          <h1 className={styles.title}>Librería Universitaria</h1>
 
-          {loadingCategories ? (
-            <CircularProgress size={24} />
-          ) : (
-            <List>
-              {categories.map((category) => (
-                <ListItem key={category.id} disablePadding>
-                  <ListItemButton
-                    onClick={() => {
-                      router.push(`/library/${category.id}`);
-                      setDrawerOpen(false);
-                    }}
-                  >
-                    <ListItemText primary={category.name} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-          )}
-        </Box>
-      </Drawer>
+          <div className={styles.actions}>
+            <button
+              aria-label="home"
+              className={styles.actionButton}
+              onClick={() => router.push('/library')}
+              type="button"
+            >
+              🏠
+            </button>
+            <button
+              aria-label="shoppingcart"
+              className={styles.actionButton}
+              onClick={() => router.push('/library/cart')}
+              type="button"
+            >
+              🛒
+            </button>
+            <button
+              aria-label="historic"
+              className={styles.actionButton}
+              onClick={() => router.push('/library/historic')}
+              type="button"
+            >
+              🕘
+            </button>
+            <button
+              aria-label="menu"
+              className={styles.actionButton}
+              onClick={() => setDrawerOpen(true)}
+              type="button"
+            >
+              ☰
+            </button>
+          </div>
+        </div>
+      </div>
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <Typography variant="h4">Librería Universitaria</Typography>
+      {drawerOpen ? (
+        <div className={styles.drawerOverlay} onClick={() => setDrawerOpen(false)}>
+          <aside className={styles.drawerPanel} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.drawerHeader}>
+              <h2 className={styles.drawerTitle}>Categorias</h2>
+              <button
+                className={styles.drawerClose}
+                onClick={() => setDrawerOpen(false)}
+                type="button"
+              >
+                Cerrar
+              </button>
+            </div>
 
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          <IconButton
-            aria-label="home"
-            color="inherit"
-            edge="start"
-            onClick={() => router.push('/library')}
-          >
-            <HomeIcon />
-          </IconButton>
+            <hr className={styles.divider} />
 
-          <IconButton
-            aria-label="shoppingcart"
-            color="inherit"
-            edge="start"
-            onClick={() => router.push('/library/cart')}
-          >
-            <ShoppingCartIcon />
-          </IconButton>
-
-          <IconButton
-            aria-label="historic"
-            color="inherit"
-            edge="start"
-            onClick={() => router.push('/library/historic')}
-          >
-            <HistoryIcon />
-          </IconButton>
-
-          <IconButton aria-label="menu" color="inherit" edge="start" onClick={toggleDrawer}>
-            <MenuIcon />
-          </IconButton>
-        </Box>
-      </Box>
-    </Box>
+            {loadingCategories ? (
+              <p className={styles.loadingText}>Cargando categorias...</p>
+            ) : (
+              <ul className={styles.categoryList}>
+                {categories.map((category) => (
+                  <li className={styles.categoryItem} key={category.id}>
+                    <button
+                      className={styles.categoryButton}
+                      onClick={() => {
+                        router.push(`/library/${category.id}`);
+                        setDrawerOpen(false);
+                      }}
+                      type="button"
+                    >
+                      {category.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </aside>
+        </div>
+      ) : null}
+    </>
   );
 }

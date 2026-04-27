@@ -4,15 +4,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Book, BookFilters } from '@/types';
+import styles from './LibraryCategoriesClient.module.css';
 
 type LibraryCategoriesClientProps = {
-  categoryId: string;
   categoryName: string;
   initialBooks: Book[];
 };
 
 export function LibraryCategoriesClient({
-  categoryId,
   categoryName,
   initialBooks,
 }: LibraryCategoriesClientProps) {
@@ -56,16 +55,15 @@ export function LibraryCategoriesClient({
   };
 
   return (
-    <section className="grid gap-8 lg:grid-cols-[300px_1fr]">
-      <aside className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm">
-        <h1 className="text-3xl font-semibold">Library Categories</h1>
-        <p className="mt-1 text-zinc-600">Categoría: {categoryName}</p>
+    <section className={styles.layout}>
+      <aside className={styles.sidebar}>
+        <p className={styles.sidebarCategory}>Categoría: {categoryName}</p>
 
-        <div className="mt-6 space-y-4">
-          <label className="block text-sm font-medium text-zinc-700">
+        <div className={styles.filters}>
+          <label className={styles.field}>
             ISBN
             <input
-              className="mt-1 w-full rounded border border-zinc-300 px-3 py-2"
+              className={styles.input}
               value={filters.ISBN ?? ''}
               onChange={(event) => handleFilterChange('ISBN', event.target.value)}
               placeholder="978..."
@@ -73,30 +71,30 @@ export function LibraryCategoriesClient({
             />
           </label>
 
-          <label className="block text-sm font-medium text-zinc-700">
+          <label className={styles.field}>
             Autor
             <input
-              className="mt-1 w-full rounded border border-zinc-300 px-3 py-2"
+              className={styles.input}
               value={filters.author ?? ''}
               onChange={(event) => handleFilterChange('author', event.target.value)}
               type="text"
             />
           </label>
 
-          <label className="block text-sm font-medium text-zinc-700">
+          <label className={styles.field}>
             Título
             <input
-              className="mt-1 w-full rounded border border-zinc-300 px-3 py-2"
+              className={styles.input}
               value={filters.title ?? ''}
               onChange={(event) => handleFilterChange('title', event.target.value)}
               type="text"
             />
           </label>
 
-          <label className="block text-sm font-medium text-zinc-700">
+          <label className={styles.field}>
             Año
             <input
-              className="mt-1 w-full rounded border border-zinc-300 px-3 py-2"
+              className={styles.input}
               value={filters.year ?? ''}
               onChange={(event) =>
                 handleFilterChange('year', event.target.value ? Number(event.target.value) : undefined)
@@ -105,10 +103,10 @@ export function LibraryCategoriesClient({
             />
           </label>
 
-          <label className="block text-sm font-medium text-zinc-700">
+          <label className={styles.field}>
             Precio máximo (€)
             <input
-              className="mt-1 w-full"
+              className={styles.rangeInput}
               max={500}
               min={0}
               onChange={(event) => handleFilterChange('priceMax', Number(event.target.value))}
@@ -118,7 +116,7 @@ export function LibraryCategoriesClient({
           </label>
 
           <button
-            className="w-full rounded bg-zinc-900 px-4 py-2 font-medium text-white hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className={styles.applyButton}
             disabled={loading}
             onClick={applyFilters}
             type="button"
@@ -128,43 +126,31 @@ export function LibraryCategoriesClient({
         </div>
       </aside>
 
-      <div>
-        <div className="mb-5 flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm uppercase tracking-wide text-zinc-500">Ruta</p>
-            <p className="text-lg font-medium text-zinc-700">/library/{categoryId}</p>
-          </div>
-          <Link className="rounded border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100" href="/library">
-            Volver a la librería
-          </Link>
-        </div>
+      <div className={styles.content}>
 
         {books.length === 0 ? (
-          <p className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-zinc-700">
+          <p className={styles.emptyState}>
             No hay libros para mostrar con estos filtros.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          <div className={styles.grid}>
             {books.map((book) => (
-              <article
-                className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition-transform hover:-translate-y-0.5"
-                key={book.id}
-              >
-                <Link href={`/library/book/${book.id}`}>
-                  <div className="relative h-[320px] w-full bg-zinc-100">
+              <article className={styles.card} key={book.id}>
+                <Link className={styles.cardLink} href={`/library/book/${book.id}`}>
+                  <div className={styles.coverWrap}>
                     <Image
                       alt={book.title}
-                      className="object-cover"
+                      className={styles.coverImage}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                       src={book.cover}
                     />
                   </div>
 
-                  <div className="p-3">
-                    <h2 className="truncate text-base font-medium">{book.title}</h2>
-                    <p className="truncate text-sm text-zinc-600">{book.author}</p>
-                    <p className="mt-2 text-lg font-semibold text-emerald-700">
+                  <div className={styles.cardContent}>
+                    <h2 className={styles.cardTitle}>{book.title}</h2>
+                    <p className={styles.cardAuthor}>{book.author}</p>
+                    <p className={styles.cardPrice}>
                       {new Intl.NumberFormat('es-ES', {
                         style: 'currency',
                         currency: 'EUR',

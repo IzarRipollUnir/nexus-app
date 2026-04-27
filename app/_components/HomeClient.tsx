@@ -1,17 +1,7 @@
 'use client';
 
-import {
-  Box,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-} from '@mui/material';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import WorkIcon from '@mui/icons-material/Work';
-import LocalCafeIcon from '@mui/icons-material/LocalCafe';
-import EventIcon from '@mui/icons-material/Event';
 import { useRouter } from 'next/navigation';
+import styles from './HomeClient.module.css';
 
 type HomeClientProps = {
   isAuthenticated: boolean;
@@ -24,113 +14,89 @@ export function HomeClient({ isAuthenticated }: HomeClientProps) {
     {
       title: 'Librería Universitaria',
       description: 'Accede a miles de libros y revistas académicas',
-      icon: <MenuBookIcon sx={{ fontSize: 60 }} />,
+      icon: '📚',
       link: '/library',
-      color: '#1976d2',
+      accentClass: styles.serviceActionLibrary,
     },
     {
       title: 'Co-working',
       description: 'Reserva espacios de trabajo colaborativo',
-      icon: <WorkIcon sx={{ fontSize: 60 }} />,
+      icon: '💼',
       link: '/coworking',
-      color: '#2e7d32',
+      accentClass: styles.serviceActionCoworking,
     },
     {
       title: 'Cafetería',
       description: 'Próximamente disponible',
-      icon: <LocalCafeIcon sx={{ fontSize: 60 }} />,
+      icon: '☕',
       link: '#',
-      color: '#ed6c02',
+      accentClass: styles.serviceActionCafeteria,
       disabled: true,
     },
     {
       title: 'Eventos',
       description: 'Próximamente disponible',
-      icon: <EventIcon sx={{ fontSize: 60 }} />,
+      icon: '🎫',
       link: '#',
-      color: '#9c27b0',
+      accentClass: styles.serviceActionEvent,
       disabled: true,
     },
   ];
 
   return (
-    <Box>
-      <Box
-        sx={{
-          textAlign: 'center',
-          py: 8,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          color: 'white',
-          borderRadius: 2,
-          mb: 6,
-        }}
-      >
-        <Typography variant="h2" component="h1" gutterBottom fontWeight="bold">
+    <section className={styles.root}>
+      <div className={styles.hero}>
+        <h1 className={styles.heroTitle}>
           Bienvenido a NEXUS
-        </Typography>
-        <Typography variant="h5" sx={{ mb: 4 }}>
+        </h1>
+        <p className={styles.heroSubtitle}>
           Tu plataforma universitaria integral
-        </Typography>
+        </p>
         {!isAuthenticated ? (
-          <Button
+          <button
             onClick={() => router.push('/login')}
-            variant="contained"
-            size="large"
-            sx={{ bgcolor: 'white', color: '#667eea', '&:hover': { bgcolor: '#f5f5f5' } }}
+            className={styles.heroButton}
+            type="button"
           >
             Iniciar Sesión
-          </Button>
+          </button>
         ) : null}
-      </Box>
+      </div>
 
-      <Typography variant="h4" gutterBottom sx={{ mb: 4 }}>
+      <h2 className={styles.servicesTitle}>
         Nuestros Servicios
-      </Typography>
+      </h2>
 
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-          gap: 4,
-        }}
-      >
+      <div className={styles.servicesGrid}>
         {services.map((service) => (
-          <Box key={service.title}>
-            <Card
-              sx={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                opacity: service.disabled ? 0.6 : 1,
-                transition: 'transform 0.2s',
-                '&:hover': service.disabled ? {} : { transform: 'translateY(-8px)' },
-              }}
-            >
-              <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
-                <Box sx={{ color: service.color, mb: 2 }}>{service.icon}</Box>
+          <article
+            className={`${styles.serviceCard} ${service.disabled ? styles.serviceDisabled : ''}`}
+            key={service.title}
+          >
+            <div className={`${styles.serviceIconWrap} ${service.accentClass}`}>
+              <span>
+                {service.icon}
+              </span>
+            </div>
 
-                <Typography variant="h6" gutterBottom>
-                  {service.title}
-                </Typography>
+            <h3 className={styles.serviceTitle}>{service.title}</h3>
 
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  {service.description}
-                </Typography>
+            <p className={styles.serviceDescription}>{service.description}</p>
 
-                {!service.disabled && isAuthenticated ? (
-                  <Button
-                    onClick={() => router.push(service.link)}
-                    variant="outlined"
-                    sx={{ borderColor: service.color, color: service.color }}
-                  >
-                    Acceder
-                  </Button>
-                ) : null}
-              </CardContent>
-            </Card>
-          </Box>
+            {!service.disabled && isAuthenticated ? (
+              <button
+                onClick={() => router.push(service.link)}
+                className={`${styles.serviceAction} ${service.accentClass}`}
+                type="button"
+              >
+                Acceder
+              </button>
+            ) : (
+              <span className={styles.servicePlaceholder}>No disponible</span>
+            )}
+          </article>
         ))}
-      </Box>
-    </Box>
+      </div>
+    </section>
   );
 }
