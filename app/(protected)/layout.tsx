@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ProtectedNavbar } from './_components/ProtectedNavbar';
+import styles from './layout.module.css';
 
 export default async function ProtectedLayout({
   children,
@@ -14,10 +15,10 @@ export default async function ProtectedLayout({
   }
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className={styles.root}>
       <ProtectedNavbar userName={userName} />
 
-      <main className="mx-auto flex w-full max-w-5xl flex-1 px-6 py-8">{children}</main>
+      <main className={styles.main}>{children}</main>
     </div>
   );
 }

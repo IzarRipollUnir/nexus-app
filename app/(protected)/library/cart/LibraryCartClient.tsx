@@ -3,19 +3,9 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  IconButton,
-  Typography,
-} from '@mui/material';
 import { libraryService } from '@/lib/libraryService';
 import type { Book } from '@/types';
+import styles from './LibraryCartClient.module.css';
 
 const initialBooks: Book[] = [
   {
@@ -88,83 +78,87 @@ export function LibraryCartClient({ userId }: LibraryCartClientProps) {
 
   if (books.length === 0 && !successMessage) {
     return (
-      <Box className="mx-auto w-full max-w-4xl px-6 py-8">
-        <Button onClick={() => router.back()} sx={{ mb: 3 }} variant="outlined">
+      <section className={styles.root}>
+        <button
+          className={styles.backButton}
+          onClick={() => router.back()}
+          type="button"
+        >
           Volver
-        </Button>
-        <Typography variant="h5">Tu carrito está vacío</Typography>
-      </Box>
+        </button>
+        <h2 className={styles.emptyTitle}>Tu carrito está vacío</h2>
+      </section>
     );
   }
 
   return (
-    <Box className="mx-auto w-full max-w-4xl px-6 py-8">
-      <Button onClick={() => router.back()} sx={{ mb: 3 }} variant="outlined">
+    <section className={styles.root}>
+      <button
+        className={styles.backButton}
+        onClick={() => router.back()}
+        type="button"
+      >
         Volver
-      </Button>
+      </button>
 
-      <Typography variant="h4" gutterBottom>
-        Carrito de Compras
-      </Typography>
+      <h1 className={styles.title}>Carrito de Compras</h1>
 
-      <Typography sx={{ mb: 2 }} variant="body2" color="text.secondary">
+      <p className={styles.user}>
         Usuario: {userId}
-      </Typography>
+      </p>
 
-      <Divider sx={{ mb: 2 }} />
+      <hr className={styles.divider} />
 
       {errorMessage ? (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <div className={styles.messageError}>
           {errorMessage}
-        </Alert>
+        </div>
       ) : null}
 
       {successMessage ? (
-        <Alert severity="success" sx={{ mb: 2 }}>
+        <div className={styles.messageSuccess}>
           {successMessage}
-        </Alert>
+        </div>
       ) : null}
 
       {books.map((book) => (
-        <Card key={book.id} sx={{ display: 'flex', mb: 2 }}>
-          <Box sx={{ position: 'relative', width: 120, minWidth: 120, height: 180 }}>
-            <Image alt={book.title} fill className="object-cover" src={book.cover} />
-          </Box>
-          <CardContent sx={{ flexGrow: 1, position: 'relative' }}>
-            <Typography variant="subtitle1">{book.title}</Typography>
-            <Typography variant="body2" color="text.secondary">
+        <article className={styles.itemCard} key={book.id}>
+          <div className={styles.coverWrap}>
+            <Image alt={book.title} fill className={styles.coverImage} src={book.cover} />
+          </div>
+          <div className={styles.itemContent}>
+            <h2 className={styles.itemTitle}>{book.title}</h2>
+            <p className={styles.itemAuthor}>
               {book.author}
-            </Typography>
-            <Typography variant="h6" color="primary" sx={{ mt: 1 }}>
+            </p>
+            <p className={styles.itemPrice}>
               €{book.price?.toFixed(2) ?? '0.00'}
-            </Typography>
-            <IconButton
-              color="error"
+            </p>
+            <button
+              className={styles.removeButton}
               onClick={() => handleRemove(book.id)}
-              size="small"
-              sx={{ position: 'absolute', top: 8, right: 8 }}
+              type="button"
             >
-              <DeleteIcon />
-            </IconButton>
-          </CardContent>
-        </Card>
+              Eliminar
+            </button>
+          </div>
+        </article>
       ))}
 
-      <Divider sx={{ my: 2 }} />
+      <hr className={styles.divider} />
 
-      <Typography sx={{ mb: 2 }} variant="h6">
+      <p className={styles.total}>
         Total: €{totalPrice.toFixed(2)}
-      </Typography>
+      </p>
 
-      <Button
-        fullWidth
-        color="primary"
+      <button
+        className={styles.purchaseButton}
         disabled={submitting}
         onClick={handlePurchase}
-        variant="contained"
+        type="button"
       >
         {submitting ? 'Comprando...' : 'Comprar'}
-      </Button>
-    </Box>
+      </button>
+    </section>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import styles from './AddToCartButton.module.css';
 
 export function AddToCartButton() {
   const [addedToCart, setAddedToCart] = useState(false);
@@ -15,15 +16,15 @@ export function AddToCartButton() {
   }, [addedToCart]);
 
   return (
-    <div>
+    <div className={styles.root}>
       {addedToCart ? (
-        <p className="mb-3 rounded border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+        <p className={styles.success}>
           Libro anadido al carrito.
         </p>
       ) : null}
 
       <button
-        className="rounded bg-zinc-900 px-4 py-2 font-medium text-white hover:bg-zinc-700"
+        className={styles.button}
         onClick={() => setAddedToCart(true)}
         type="button"
       >

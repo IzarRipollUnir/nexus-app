@@ -1,0 +1,27 @@
+.root {
+  display: inline-block;
+}
+
+.success {
+  margin-bottom: 0.75rem;
+  border: 1px solid #6ee7b7;
+  border-radius: 0.375rem;
+  background: #ecfdf5;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #047857;
+}
+
+.button {
+  border: 0;
+  border-radius: 0.5rem;
+  background: #18181b;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3f3f46;
+}

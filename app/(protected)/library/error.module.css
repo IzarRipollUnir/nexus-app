@@ -1,0 +1,33 @@
+.root {
+  width: 100%;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  background: #fef2f2;
+  padding: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #991b1b;
+}
+
+.text {
+  margin-top: 0.5rem;
+  color: #b91c1c;
+}
+
+.button {
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #b91c1c;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #991b1b;
+}

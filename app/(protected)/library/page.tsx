@@ -1,49 +1,37 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { libraryService } from '@/lib/libraryService';
+import styles from './page.module.css';
 
 export default async function LibraryHomePage() {
   const bestSellers = await libraryService.getBestSellers();
 
   return (
-    <section className="w-full">
-      <header className="mb-6 flex items-end justify-between gap-4">
+    <section className={styles.root}>
+      <header className={styles.header}>
         <div>
-          <h1 className="text-3xl font-semibold">Library Home</h1>
-          <p className="mt-1 text-zinc-600">Los 10 mas vendidos</p>
-        </div>
-
-        <div className="flex gap-3 text-sm">
-          <Link className="underline" href="/library/historic">
-            Mis compras
-          </Link>
-          <Link className="underline" href="/library/cart">
-            Carrito
-          </Link>
+          <p className={styles.subtitle}>Los 10 mas vendidos</p>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+      <div className={styles.grid}>
         {bestSellers.map((book) => (
-          <article
-            className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition-transform hover:-translate-y-0.5"
-            key={book.id}
-          >
-            <Link href={`/library/book/${book.id}`}>
-              <div className="relative h-[320px] w-full bg-zinc-100">
+          <article className={styles.card} key={book.id}>
+            <Link className={styles.cardLink} href={`/library/book/${book.id}`}>
+              <div className={styles.coverWrap}>
                 <Image
                   alt={book.title}
-                  className="object-cover"
+                  className={styles.coverImage}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   src={book.cover}
                 />
               </div>
 
-              <div className="p-3">
-                <h2 className="truncate text-base font-medium">{book.title}</h2>
-                <p className="truncate text-sm text-zinc-600">{book.author}</p>
-                <p className="mt-2 text-lg font-semibold text-emerald-700">
+              <div className={styles.cardContent}>
+                <h2 className={styles.cardTitle}>{book.title}</h2>
+                <p className={styles.cardAuthor}>{book.author}</p>
+                <p className={styles.cardPrice}>
                   {new Intl.NumberFormat('es-ES', {
                     style: 'currency',
                     currency: 'EUR',

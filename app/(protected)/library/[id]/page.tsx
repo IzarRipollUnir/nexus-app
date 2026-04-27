@@ -23,7 +23,6 @@ export default async function LibraryCategoriesPage({
 
   return (
     <LibraryCategoriesClient
-      categoryId={id}
       categoryName={category.name}
       initialBooks={books}
     />
