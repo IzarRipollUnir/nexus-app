@@ -23,3 +23,25 @@ export type BookFilters = {
   priceMax?: number;
   ISBN?: string;
 };
+
+export type CoworkingSpace = {
+  id: number;
+  name: string;
+  capacity: number;
+  features: string[];
+  description: string;
+  occupied?: boolean;
+  reservedBy?: string;
+  startTime?: string;
+  endTime?: string;
+};
+
+export type Reservation = {
+  id: number;
+  userId: string;
+  spaceId: number;
+  reservedBy: string;
+  startTime: string;
+  endTime: string;
+  spaceName?: string;
+};

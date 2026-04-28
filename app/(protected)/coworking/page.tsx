@@ -1,10 +1,9 @@
-import styles from './page.module.css';
+import CoworkingHomeClient from './CoworkingHomeClient';
 
 export default function CoworkingHomePage() {
   return (
-    <section className={styles.root}>
-      <h1 className={styles.title}>Coworking Home</h1>
-      <p className={styles.subtitle}>Ruta protegida: /coworking</p>
+    <section className="min-h-[calc(100vh-76px)] bg-slate-50 py-8">
+      <CoworkingHomeClient />
     </section>
   );
 }
