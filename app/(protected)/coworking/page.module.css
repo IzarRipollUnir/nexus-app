@@ -1,13 +1,5 @@
 .root {
-  width: 100%;
-}
-
-.title {
-  font-size: 1.875rem;
-  font-weight: 600;
-}
-
-.subtitle {
-  margin-top: 0.5rem;
-  color: #52525b;
+  min-height: calc(100vh - 76px);
+  background: #f8fafc;
+  padding: 2rem 0;
 }
