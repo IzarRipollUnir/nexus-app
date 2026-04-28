@@ -27,6 +27,7 @@ export type BookFilters = {
 export type CoworkingSpace = {
   id: number;
   name: string;
+  floor: number;
   capacity: number;
   features: string[];
   description: string;
