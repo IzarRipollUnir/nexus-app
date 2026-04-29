@@ -9,11 +9,16 @@ export async function login(formData: FormData) {
     typeof redirectToRaw === 'string' && redirectToRaw.startsWith('/')
       ? redirectToRaw
       : '/library';
+  const emailRaw = formData.get('email');
+  const userName =
+    typeof emailRaw === 'string' && emailRaw.includes('@')
+      ? emailRaw.split('@')[0]
+      : 'Usuario';
 
   const cookieStore = await cookies();
   cookieStore.set({
     name: 'session',
-    value: 'demo-user',
+    value: userName,
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
