@@ -39,9 +39,10 @@ const coworkingSpaces = [
   },
 ];
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const id = Number(params.id);
-  const space = coworkingSpaces.find((item) => item.id === id);
+export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const spaceId = Number(id);
+  const space = coworkingSpaces.find((item) => item.id === spaceId);
 
   if (!space) {
     return NextResponse.json({ error: 'Espacio no encontrado' }, { status: 404 });
