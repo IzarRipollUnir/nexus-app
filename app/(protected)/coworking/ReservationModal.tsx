@@ -73,7 +73,7 @@ export default function ReservationModal({
       setError('Debes seleccionar hora de inicio y fin.');
       return;
     }
-
+  
     const start = new Date(startTime);
     const end = new Date(endTime);
 
