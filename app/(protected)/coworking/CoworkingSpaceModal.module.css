@@ -1,0 +1,129 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 1rem;
+}
+
+.modal {
+  width: 100%;
+  max-width: 42rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 1.5rem;
+}
+
+.modalLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.modalTitle {
+  margin-top: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.closeButton {
+  border: none;
+  border-radius: 9999px;
+  background: #f8fafc;
+  color: #475569;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #e2e8f0;
+}
+
+.modalBody {
+  padding: 1.5rem;
+}
+
+.modalGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .modalGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.infoCard {
+  border-radius: 1.5rem;
+  background: #f8fafc;
+  padding: 1rem;
+}
+
+.infoLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.infoValue {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  color: #334155;
+}
+
+.description {
+  margin-top: 1rem;
+  color: #475569;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.featureList {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.featureChip {
+  border-radius: 9999px;
+  background: #f1f5f9;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  color: #334155;
+}
+
+.reservationInfo {
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+  background: #f8fafc;
+  padding: 1rem;
+}
+
+.reservationLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.reservationText {
+  margin-top: 0.5rem;
+  color: #475569;
+  font-size: 0.9375rem;
+}

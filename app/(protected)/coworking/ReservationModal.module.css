@@ -1,0 +1,142 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 1rem;
+}
+
+.modal {
+  width: 100%;
+  max-width: 42rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 1.5rem;
+}
+
+.modalLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.modalTitle {
+  margin-top: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.closeButton {
+  border: none;
+  border-radius: 9999px;
+  background: #f8fafc;
+  color: #475569;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #e2e8f0;
+}
+
+.form {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.fieldGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .fieldGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.fieldGroup {
+  display: grid;
+  gap: 0.5rem;
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.labelText {
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  border-radius: 1.5rem;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  padding: 0.875rem 1rem;
+  color: #0f172a;
+  outline: none;
+  font-size: 0.9375rem;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #0f172a;
+}
+
+.errorText {
+  color: #b91c1c;
+  font-size: 0.9375rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.buttonCancel {
+  border-radius: 1.5rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0.875rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttonSubmit {
+  border-radius: 1.5rem;
+  border: none;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.875rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttonSubmit:hover {
+  background: #1e293b;
+}
+
+.buttonSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

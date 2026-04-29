@@ -1,4 +1,4 @@
-const apiBaseUrl = 'https://mock.apidog.com/m1/1131845-1123817-default';
+const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://mock.apidog.com/m1/1131845-1123817-default';
 
 type RequestInitWithJson = RequestInit & {
   json?: unknown;
@@ -28,4 +28,6 @@ async function request<T>(path: string, init?: RequestInitWithJson): Promise<T> 
 export const api = {
   get: <T>(path: string) => request<T>(path),
   post: <T>(path: string, json?: unknown) => request<T>(path, { method: 'POST', json }),
+  put: <T>(path: string, json?: unknown) => request<T>(path, { method: 'PUT', json }),
+  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
 };

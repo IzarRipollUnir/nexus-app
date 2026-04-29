@@ -1,0 +1,346 @@
+.root {
+  width: 100%;
+}
+
+.hero {
+  margin-bottom: 2rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.heroHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.heroTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.heroText {
+  margin-top: 0.5rem;
+  color: #475569;
+  max-width: 42rem;
+}
+
+.heroBadge {
+  margin-top: 1.5rem;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: 1.25rem;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  color: #334155;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.heroBadgeTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.heroBadgeText {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.section {
+  display: grid;
+  gap: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.sectionSubtitle {
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.loadingBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  padding: 0.5rem 0.75rem;
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.cardAvailable {
+  border-color: #d1fae5;
+  background: #ecfdf5;
+}
+
+.cardOccupied {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.cardMetadata {
+  margin-top: 0.25rem;
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.statusBadge {
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.statusAvailable {
+  background: #d1fae5;
+  color: #166534;
+}
+
+.statusOccupied {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.features {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.featurePill {
+  border-radius: 9999px;
+  background: #f8fafc;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.75rem;
+  color: #334155;
+}
+
+.cardText {
+  margin-top: 1.25rem;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+.cardDetails {
+  margin-top: 1.5rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.cardDetailsTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.cardDetailsText {
+  margin-top: 0.5rem;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+.reserveButton {
+  margin-top: 1.5rem;
+  border-radius: 1.25rem;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reserveButton:hover {
+  background: #1e293b;
+}
+
+.reservationsList {
+  display: grid;
+  gap: 1rem;
+}
+
+.reservationCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  padding: 1.5rem;
+}
+
+.reservationTop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.reservationTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.reservationTime {
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.reservationActions {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.buttonSecondary {
+  border-radius: 1.25rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buttonSecondary:hover {
+  background: #f8fafc;
+}
+
+.buttonDanger {
+  border-radius: 1.25rem;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.errorText {
+  color: #b91c1c;
+  font-size: 0.9375rem;
+}
+
+.confirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 1rem;
+}
+
+.confirmCard {
+  width: 100%;
+  max-width: 40rem;
+  overflow: hidden;
+  border-radius: 2rem;
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+}
+
+.confirmHeader {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 1.5rem;
+}
+
+.confirmTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.confirmText {
+  margin-top: 0.5rem;
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.confirmBody {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.noResults {
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  padding: 1.5rem;
+  color: #334155;
+}
